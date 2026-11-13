@@ -1,0 +1,69 @@
+﻿### Create first posting
+# @name first
+POST http://localhost:5050/postings
+Content-Type: application/json
+
+{
+  "from": "Іван",
+  "to": "Олена",
+  "content": "Документи",
+  "deliveryType": "Department",
+  "weight": 0.5,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100
+}
+
+### Create second posting
+# @name second
+POST http://localhost:5050/postings
+Content-Type: application/json
+
+{
+  "from": "Іван",
+  "to": "Олена",
+  "content": "Книги",
+  "deliveryType": "Courier",
+  "weight": 2,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100
+}
+
+### Get all postings
+GET http://localhost:5050/postings
+
+### Get first posting
+GET http://localhost:5050/postings/{{first.response.body.$.id}}
+
+### Get non-existing posting
+GET http://localhost:5050/postings/2147483647
+
+### Update first posting
+PUT http://localhost:5050/postings/{{first.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "from": "Іван",
+  "to": "Олена",
+  "content": "Документи оновлено",
+  "deliveryType": "Department",
+  "weight": 0.5,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100,
+  "id": {{first.response.body.$.id}},
+  "price": 20
+}
+
+### Get updated posting
+GET http://localhost:5050/postings/{{first.response.body.$.id}}
+
+### Delete first posting
+DELETE http://localhost:5050/postings/{{first.response.body.$.id}}
+
+### Get deleted posting
+GET http://localhost:5050/postings/{{first.response.body.$.id}}
